@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Land | ارگانیک لند</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --emerald: #064e3b;
+            --green: #10b981;
+            --gold: #d4af37;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #fefcf5;
+            direction: rtl;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(6, 78, 59, 0.08);
+            border-radius: 32px;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: 0.4s;
+        }
+        
+        header.scrolled {
+            background: rgba(255, 251, 245, 0.9);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #064e3b, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            user-select: none;
+        }
+        
+        .logo i {
+            -webkit-text-fill-color: #d4af37;
+            font-size: 2rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #1e2b2c;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #064e3b;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #064e3b;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            padding: 0.7rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #d4af37;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            margin-top: 100px;
+            min-height: 80vh;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(6,78,59,0.3), rgba(6,78,59,0.6)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200') center/cover;
+            border-radius: 40px;
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            margin: 2rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: #064e3b;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #053a2c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-gold {
+            background: #d4af37;
+            color: #064e3b;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            text-align: center;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #064e3b;
+            margin: 3rem 0;
+            font-size: 2rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin: 0.5rem 0;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #064e3b;
+            background: white;
+            color: #064e3b;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #064e3b;
+            color: white;
+        }
+        
+        .search-box {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .search-box input {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #ddd;
+            width: 300px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background: #064e3b;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            border-radius: 40px 40px 0 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-grid a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1.5rem;
+        }
+        
+        .admin-form input, .admin-form textarea, .admin-form select {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-menu { gap: 1rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container header-inner">
+            <div class="logo" onclick="openAdmin()">
+                <i class="fas fa-leaf"></i> Organic Land
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a onclick="navigateTo('home')" class="active" id="nav-home">خانه</a></li>
+                    <li><a onclick="navigateTo('products')" id="nav-products">محصولات</a></li>
+                    <li><a onclick="navigateTo('about')" id="nav-about">درباره ما</a></li>
+                    <li><a onclick="navigateTo('contact')" id="nav-contact">تماس</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="openCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <!-- صفحه خانه -->
+        <div class="page active" id="page-home">
+            <div class="hero">
+                <h1>🌿 سلامتی از دل طبیعت</h1>
+                <p>محصولات ۱۰۰٪ طبیعی و ارگانیک با بالاترین کیفیت</p>
+                <button class="btn btn-primary" onclick="navigateTo('products')">مشاهده محصولات</button>
+                <button class="btn btn-gold" onclick="navigateTo('contact')">ثبت سفارش</button>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>۱۰۰٪ طبیعی</h3>
+                    <p>بدون مواد شیمیایی</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>کیفیت پریمیوم</h3>
+                    <p>بهترین مواد اولیه</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-truck-fast"></i>
+                    <h3>ارسال سریع</h3>
+                    <p>تحویل ۲۴ تا ۴۸ ساعته</p>
+                </div>
+            </div>
+            <h2 class="section-title">محصولات ویژه</h2>
+            <div class="products-grid" id="homeProducts"></div>
+        </div>
+
+        <!-- صفحه محصولات -->
+        <div class="page" id="page-products">
+            <h2 class="section-title">همه محصولات</h2>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterProducts('all', this)">همه</button>
+                <button class="filter-btn" onclick="filterProducts('food', this)">خوراکی</button>
+                <button class="filter-btn" onclick="filterProducts('care', this)">مراقبتی</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 جستجوی محصول..." oninput="searchProducts()">
+            </div>
+            <div class="products-grid" id="allProducts"></div>
+        </div>
+
+        <!-- درباره ما -->
+        <div class="page" id="page-about">
+            <div style="text-align:center; padding:4rem 2rem;">
+                <i class="fas fa-seedling" style="font-size:4rem; color:#064e3b;"></i>
+                <h2 style="color:#064e3b; margin:1.5rem 0;">درباره ارگانیک لند</h2>
+                <p style="max-width:700px; margin:auto; line-height:2;">
+                    ما در ارگانیک لند با عشق به طبیعت، محصولاتی کاملاً ارگانیک و سالم را مستقیماً از بهترین مزارع ایران گردآوری می‌کنیم. هدف ما ترویج سبک زندگی سالم و احترام به محیط زیست است.
+                </p>
+            </div>
+        </div>
+
+        <!-- تماس -->
+        <div class="page" id="page-contact">
+            <div style="text-align:center; padding:4rem 2rem;">
+                <i class="fas fa-envelope" style="font-size:3rem; color:#d4af37;"></i>
+                <h2 style="color:#064e3b; margin:1rem 0;">تماس با ما</h2>
+                <p>📱 تلگرام: <strong>@organic_land_admin</strong></p>
+                <p>📞 تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Organic Land</h3>
+                    <p>سلامتی از دل طبیعت</p>
+                </div>
+                <div>
+                    <h4>دسترسی سریع</h4>
+                    <a onclick="navigateTo('home')">خانه</a>
+                    <a onclick="navigateTo('products')">محصولات</a>
+                    <a onclick="navigateTo('about')">درباره ما</a>
+                </div>
+                <div>
+                    <h4>ارتباط با ما</h4>
+                    <a href="https://t.me/organic_land_admin" target="_blank">@organic_land_admin</a>
+                </div>
+            </div>
+            <div class="copyright">© ۲۰۲۶ Organic Land</div>
+        </div>
+    </footer>
+
+    <!-- مودال سبد خرید -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeCart()">&times;</button>
+            <h3 style="color:#064e3b;">🛒 سبد خرید</h3>
+            <div id="cartItems"></div>
+            <div style="font-size:1.3rem; font-weight:bold; margin:1.5rem 0; color:#064e3b;" id="cartTotal">جمع کل: ۰ تومان</div>
+            <button class="btn btn-primary" style="width:100%;" onclick="checkout()">ثبت سفارش در تلگرام</button>
+        </div>
+    </div>
+
+    <!-- مودال پنل مدیریت -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeAdmin()">&times;</button>
+            
+            <!-- فرم ورود -->
+            <div id="adminLoginForm">
+                <h3 style="color:#064e3b;">🔐 ورود مدیر</h3>
+                <input type="password" id="adminPassword" placeholder="رمز عبور" style="width:100%; padding:0.8rem; margin:0.5rem 0; border-radius:12px; border:1px solid #ddd; font-family:'Vazirmatn';">
+                <input type="text" id="adminSecurityAnswer" placeholder="اسم پدر (امنیتی)" style="width:100%; padding:0.8rem; margin:0.5rem 0; border-radius:12px; border:1px solid #ddd; font-family:'Vazirmatn';">
+                <button class="btn btn-primary" style="width:100%; margin-top:1rem;" onclick="adminLogin()">ورود</button>
+            </div>
+            
+            <!-- پنل مدیریت -->
+            <div id="adminPanel" style="display:none;">
+                <h3 style="color:#064e3b;">📦 مدیریت محصولات</h3>
+                <div class="admin-form">
+                    <input type="text" id="prodName" placeholder="نام محصول">
+                    <input type="number" id="prodPrice" placeholder="قیمت (تومان)">
+                    <input type="number" id="prodOldPrice" placeholder="قیمت قبل از تخفیف (اختیاری)">
+                    <input type="text" id="prodImage" placeholder="آدرس تصویر">
+                    <select id="prodCategory">
+                        <option value="food">خوراکی</option>
+                        <option value="care">مراقبتی</option>
+                    </select>
+                    <input type="number" id="prodStock" placeholder="موجودی">
+                    <textarea id="prodDesc" placeholder="توضیحات"></textarea>
+                    <button class="btn btn-primary" style="width:100%;" onclick="addProduct()">➕ افزودن محصول</button>
+                </div>
+                <div id="adminProductList" style="margin-top:1rem;"></div>
+                <button class="btn" style="background:#ef4444; color:white; width:100%; margin-top:1rem;" onclick="adminLogout()">🚪 خروج</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== داده‌های اولیه ==========
+        let products = JSON.parse(localStorage.getItem('organicProducts')) || [
+            { id: 1, name: 'عسل طبیعی وحشی', price: 250000, oldPrice: 300000, category: 'food', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400', desc: 'عسل کوهستان', stock: 15 },
+            { id: 2, name: 'روغن آرگان اصل', price: 180000, oldPrice: 220000, category: 'care', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400', desc: 'روغن مراقبت مو', stock: 8 },
+            { id: 3, name: 'دمنوش بابونه', price: 85000, oldPrice: null, category: 'food', image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400', desc: 'دمنوش آرامش', stock: 20 },
+            { id: 4, name: 'صابون زیتون', price: 65000, oldPrice: 80000, category: 'care', image: 'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=400', desc: 'صابون طبیعی', stock: 0 },
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('organicCart')) || [];
+        let isAdminLoggedIn = JSON.parse(localStorage.getItem('adminSession')) || false;
+        let currentFilter = 'all';
+
+        // ========== ذخیره‌سازی ==========
+        function saveProducts() { localStorage.setItem('organicProducts', JSON.stringify(products)); }
+        function saveCart() { localStorage.setItem('organicCart', JSON.stringify(cart)); updateCartCount(); }
+
+        // ========== ناوبری ==========
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+            document.getElementById('nav-' + page).classList.add('active');
+            renderProducts();
+        }
+
+        // ========== اسکرول هدر ==========
+        window.onscroll = function() {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+        };
+
+        // ========== سبد خرید ==========
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product || product.stock < 1) return alert('❌ محصول ناموجود است');
+            
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                if (existing.qty < product.stock) {
+                    existing.qty++;
+                } else {
+                    return alert('❌ موجودی کافی نیست');
+                }
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            saveCart();
+            alert('✅ به سبد خرید اضافه شد');
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').classList.add('active');
+            renderCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center;">سبد خرید خالی است</p>';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div style="display:flex; align-items:center; gap:1rem; padding:1rem 0; border-bottom:1px solid #eee;">
+                        <img src="${item.image}" style="width:60px; height:60px; border-radius:12px; object-fit:cover;">
+                        <div style="flex:1;">
+                            <strong>${item.name}</strong><br>
+                            ${item.price.toLocaleString()} تومان
+                        </div>
+                        <div>
+                            <button onclick="changeQty(${item.id}, -1)">➖</button>
+                            ${item.qty}
+                            <button onclick="changeQty(${item.id}, 1)">➕</button>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" style="background:#ef4444; color:white; border:none; padding:0.3rem 0.8rem; border-radius:8px; cursor:pointer;">🗑️</button>
+                    </div>
+                `).join('');
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cartTotal').textContent = `جمع کل: ${total.toLocaleString()} تومان`;
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            const product = products.find(p => p.id === id);
+            if (!item || !product) return;
+            
+            const newQty = item.qty + delta;
+            if (newQty < 1) {
+                removeFromCart(id);
+            } else if (newQty <= product.stock) {
+                item.qty = newQty;
+                saveCart();
+                renderCart();
+            } else {
+                alert('❌ موجودی کافی نیست');
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert('سبد خرید خالی است');
+            let message = '🛒 سفارش جدید:\n\n';
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.qty} عدد): ${(item.price * item.qty).toLocaleString()} تومان\n`;
+            });
+            const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            message += `\n💰 جمع کل: ${total.toLocaleString()} تومان`;
+            window.open(`https://t.me/organic_land_admin?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // ========== محصولات ==========
+        function renderProducts() {
+            let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+            const searchTerm = document.getElementById('searchInput')?.value || '';
+            if (searchTerm) {
+                filtered = filtered.filter(p => p.name.includes(searchTerm) || p.desc.includes(searchTerm));
+            }
+            
+            const html = filtered.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                    <div class="price">
+                        ${p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()}</span>` : ''}
+                        ${p.price.toLocaleString()} تومان
+                    </div>
+                    <p style="color:${p.stock > 0 ? '#10b981' : '#ef4444'};">
+                        ${p.stock > 0 ? '✅ موجود' : '❌ ناموجود'}
+                    </p>
+                    ${p.stock > 0 ? `<button class="btn btn-primary" onclick="addToCart(${p.id})">🛒 افزودن به سبد</button>` : ''}
+                </div>
+            `).join('');
+
+            document.getElementById('homeProducts').innerHTML = html || '<p>محصولی یافت نشد</p>';
+            document.getElementById('allProducts').innerHTML = html || '<p>محصولی یافت نشد</p>';
+        }
+
+        function filterProducts(category, btn) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts();
+        }
+
+        function searchProducts() {
+            renderProducts();
+        }
+
+        // ========== پنل مدیریت ==========
+        function openAdmin() {
+            document.getElementById('adminModal').classList.add('active');
+            if (isAdminLoggedIn) {
+                document.getElementById('adminLoginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminProducts();
+            } else {
+                document.getElementById('adminLoginForm').style.display = 'block';
+                document.getElementById('adminPanel').style.display = 'none';
+            }
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            const securityAnswer = document.getElementById('adminSecurityAnswer').value;
+            
+            if (password === 'OLand#2026@Admin' && securityAnswer === 'علی') {
+                isAdminLoggedIn = true;
+                localStorage.setItem('adminSession', JSON.stringify(true));
+                document.getElementById('adminLoginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminProducts();
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminSecurityAnswer').value = '';
+                alert('✅ خوش آمدید!');
+            } else {
+                alert('❌ اطلاعات اشتباه است!');
+            }
+        }
+
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('adminSession');
+            document.getElementById('adminLoginForm').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            closeAdmin();
+            alert('👋 خارج شدید');
+        }
+
+        function renderAdminProducts() {
+            const list = document.getElementById('adminProductList');
+            list.innerHTML = products.map(p => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:0.8rem; background:#f9f9f9; border-radius:12px; margin:0.5rem 0;">
+                    <div>
+                        <strong>${p.name}</strong><br>
+                        <small>💰 ${p.price.toLocaleString()} | 📦 ${p.stock}</small>
+                    </div>
+                    <button onclick="deleteProduct(${p.id})" style="background:#ef4444; color:white; border:none; padding:0.4rem 1rem; border-radius:8px; cursor:pointer;">🗑️</button>
+                </div>
+            `).join('');
+        }
+
+        function addProduct() {
+            const name = document.getElementById('prodName').value.trim();
+            const price = parseInt(document.getElementById('prodPrice').value);
+            const oldPrice = document.getElementById('prodOldPrice').value ? parseInt(document.getElementById('prodOldPrice').value) : null;
+            const image = document.getElementById('prodImage').value.trim() || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400';
+            const category = document.getElementById('prodCategory').value;
+            const stock = parseInt(document.getElementById('prodStock').value) || 0;
+            const desc = document.getElementById('prodDesc').value.trim();
+            
+            if (!name || isNaN(price)) return alert('❌ نام و قیمت الزامی است');
+            
+            products.push({ id: Date.now(), name, price, oldPrice, image, category, stock, desc });
+            saveProducts();
+            renderAdminProducts();
+            renderProducts();
+            alert('✅ محصول اضافه شد');
+            
+            ['prodName','prodPrice','prodOldPrice','prodImage','prodStock','prodDesc'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+        }
+
+        function deleteProduct(id) {
+            if (confirm('آیا مطمئن هستید؟')) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                renderAdminProducts();
+                renderProducts();
+            }
+        }
+
+        // ========== شروع ==========
+        updateCartCount();
+        renderProducts();
+    </script>
+</body>
+</html>
