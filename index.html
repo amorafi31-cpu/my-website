@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Snake Duo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg"></div>
+<main>
+  <section id="login" class="card login">
+    <div class="logo">🐍</div>
+    <h1>Snake Duo</h1>
+    <p>دو مار، یک زمین، یک رکورد 👑</p>
+    <input id="name" maxlength="18" placeholder="اسم بازیکنت..." autocomplete="off">
+    <button id="join">شروع بازی</button>
+    <small>یک نفر دیگر که وارد شود، بازی دو نفره شروع می‌شود.</small>
+  </section>
+
+  <section id="game" hidden>
+    <header>
+      <div>
+        <h1>🐍 Snake Duo</h1>
+        <span id="status">در انتظار بازیکن دوم...</span>
+      </div>
+      <div class="top"><span>👑</span> رکورد: <b id="topScore">0</b></div>
+    </header>
+
+    <div class="layout">
+      <div class="boardWrap">
+        <div id="board"></div>
+        <div id="overlay" class="overlay" hidden>
+          <div class="card"><div id="overTitle">باختی!</div><button id="restart">دوباره بازی</button></div>
+        </div>
+      </div>
+      <aside class="side card">
+        <h3>بازیکن‌ها</h3><div id="players"></div>
+        <h3>💬 چت</h3>
+        <div id="messages"></div>
+        <form id="chatForm"><input id="chatInput" maxlength="120" placeholder="پیامت..." autocomplete="off"><button>➤</button></form>
+      </aside>
+    </div>
+    <div class="controls">
+      <button data-dir="up">▲</button>
+      <div><button data-dir="right">◀</button><button data-dir="down">▼</button><button data-dir="left">▶</button></div>
+    </div>
+    <p class="hint">کیبورد: WASD یا کلیدهای جهت‌دار</p>
+  </section>
+</main>
+<script src="/socket.io/socket.io.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
